@@ -120,7 +120,7 @@ body {
 }
 .selectBox::after {
   position: absolute;
-  right: 6px;
+  right: 4px;
   width: 8px;
   height: 5px;
   background-color: var(--text-color);
@@ -203,6 +203,7 @@ body {
   width: 85vw;
   margin: 2vh 0 0 0;
   padding: 0.5em;
+  font-size: 16px;
   color: var(--text-color);
   background-color: var(--background-color);
   border: 1px solid var(--text-color);
