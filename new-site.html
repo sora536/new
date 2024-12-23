@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>archeryサイト</title>
+    <meta name="description" content="しつかり栗拾え" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="new-site.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1>んないすぅ</h1>
+    </header>
+    <div class="home open" id="home">
+      <table class="scoreTable">
+        <thead>
+          <tr>
+            <th></th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>小計</th>
+            <th>合計</th>
+          </tr>
+          <tr>
+            <th colspan="8" style="text-align: left" id="scoreInfo">70m</th>
+            <th class="selectBox">
+              <select id="select" onchange="changeDistance(this)">
+                <option value="70m">70m</option>
+                <option value="50m">50m</option>
+                <option value="30m">30m</option>
+                <option value="18m">18m</option>
+                <option value="10m">10m</option>
+              </select>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>1</th>
+            <td id="home-0"></td>
+            <td id="home-1"></td>
+            <td id="home-2"></td>
+            <td id="home-3"></td>
+            <td id="home-4"></td>
+            <td id="home-5"></td>
+            <td class="scoreSum" id="home-sum_1"></td>
+            <td class="scoreSum" id="home-all_1"></td>
+          </tr>
+          <tr>
+            <th>2</th>
+            <td id="home-6"></td>
+            <td id="home-7"></td>
+            <td id="home-8"></td>
+            <td id="home-9"></td>
+            <td id="home-10"></td>
+            <td id="home-11"></td>
+            <td class="scoreSum" id="home-sum_2"></td>
+            <td class="scoreSum" id="home-all_2"></td>
+          </tr>
+          <tr>
+            <th>3</th>
+            <td id="home-12"></td>
+            <td id="home-13"></td>
+            <td id="home-14"></td>
+            <td id="home-15"></td>
+            <td id="home-16"></td>
+            <td id="home-17"></td>
+            <td class="scoreSum" id="home-sum_3"></td>
+            <td class="scoreSum" id="home-all_3"></td>
+          </tr>
+          <tr>
+            <th>4</th>
+            <td id="home-18"></td>
+            <td id="home-19"></td>
+            <td id="home-20"></td>
+            <td id="home-21"></td>
+            <td id="home-22"></td>
+            <td id="home-23"></td>
+            <td class="scoreSum" id="home-sum_4"></td>
+            <td class="scoreSum" id="home-all_4"></td>
+          </tr>
+          <tr>
+            <th>5</th>
+            <td id="home-24"></td>
+            <td id="home-25"></td>
+            <td id="home-26"></td>
+            <td id="home-27"></td>
+            <td id="home-28"></td>
+            <td id="home-29"></td>
+            <td class="scoreSum" id="home-sum_5"></td>
+            <td class="scoreSum" id="home-all_5"></td>
+          </tr>
+          <tr>
+            <th>6</th>
+            <td id="home-30"></td>
+            <td id="home-31"></td>
+            <td id="home-32"></td>
+            <td id="home-33"></td>
+            <td id="home-34"></td>
+            <td id="home-35"></td>
+            <td class="scoreSum" id="home-sum_6"></td>
+            <td class="scoreSum" id="home-all_6"></td>
+          </tr>
+        </tbody>
+      </table>
+      <button id="X" class="yellow" ontouchstart="scoreButtonClick(this)">
+        X
+      </button>
+      <button id="10" class="yellow" ontouchstart="scoreButtonClick(this)">
+        10
+      </button>
+      <button id="9" class="yellow" ontouchstart="scoreButtonClick(this)">
+        9
+      </button>
+      <button id="8" class="red" ontouchstart="scoreButtonClick(this)">
+        8
+      </button>
+      <button id="7" class="red" ontouchstart="scoreButtonClick(this)">
+        7
+      </button>
+      <button id="6" class="blue" ontouchstart="scoreButtonClick(this)">
+        6
+      </button>
+      <button id="5" class="blue" ontouchstart="scoreButtonClick(this)">
+        5
+      </button>
+      <button id="4" class="black" ontouchstart="scoreButtonClick(this)">
+        4
+      </button>
+      <button id="3" class="black" ontouchstart="scoreButtonClick(this)">
+        3
+      </button>
+      <button id="2" class="white" ontouchstart="scoreButtonClick(this)">
+        2
+      </button>
+      <button id="1" class="white" ontouchstart="scoreButtonClick(this)">
+        1
+      </button>
+      <button id="M" class="gray" ontouchstart="scoreButtonClick(this)">
+        M
+      </button>
+      <div id="saveCheckWindow">
+        <h1>注意</h1>
+        <p>okを押した後に距離の変更はできません</p>
+        <div class="selectBox">
+          <select id="finalSelect" onchange="changeDistance(this)">
+            <option value="70m">70m</option>
+            <option value="50m">50m</option>
+            <option value="30m">30m</option>
+            <option value="18m">18m</option>
+            <option value="10m">10m</option>
+          </select>
+          <button onclick="saveCheckClick()">ok</button>
+        </div>
+      </div>
+    </div>
+    <div class="record" id="record">
+      <h1>record</h1>
+
+      <div id="scoreTable"></div>
+    </div>
+    <div class="memo" id="memo">
+      <form onsubmit="memoClick(this.firstElementChild.value)">
+        <input
+          id="memoInput"
+          type="text"
+          autocomplete="off"
+          placeholder="新しいmemoを作成"
+        />
+      </form>
+
+      <div class="memoList" id="memoList"></div>
+    </div>
+    <div class="setting" id="setting">
+      <h1>setting</h1>
+      <ul>
+        <li>距離の確認のskip</li>
+        <li>memoのcheckedされた項目の削除</li>
+        <li>colorの変更</li>
+        <li>背景画像の適用</li>
+      </ul>
+    </div>
+    <footer class="footer">
+      <span
+        class="material-icons open"
+        id="homeButton"
+        ontouchstart="footerClick(this,home)"
+        >home</span
+      >
+      <span
+        class="material-icons"
+        id="recordButton"
+        ontouchstart="footerClick(this,record)"
+        >wysiwyg</span
+      >
+      <span
+        class="material-icons"
+        id="memoButton"
+        ontouchstart="footerClick(this,memo)"
+        >checklist</span
+      >
+      <span
+        class="material-icons"
+        id="settingButton"
+        ontouchstart="footerClick(this,setting)"
+        >settings</span
+      >
+    </footer>
+    <!--改良必須、特にidを動的に変えたい-->
+    <template id="scoreTableTemplate">
+      <table class="scoreTable">
+        <thead>
+          <tr>
+            <th></th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>小計</th>
+            <th>合計</th>
+          </tr>
+          <tr>
+            <th colspan="9" style="left: 0" id="scoreInfo"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>1</th>
+            <td id="0"></td>
+            <td id="1"></td>
+            <td id="2"></td>
+            <td id="3"></td>
+            <td id="4"></td>
+            <td id="5"></td>
+            <td class="scoreSum" id="sum_1"></td>
+            <td class="scoreSum" id="all_1"></td>
+          </tr>
+          <tr>
+            <th>2</th>
+            <td id="6"></td>
+            <td id="7"></td>
+            <td id="8"></td>
+            <td id="9"></td>
+            <td id="10"></td>
+            <td id="11"></td>
+            <td class="scoreSum" id="sum_2"></td>
+            <td class="scoreSum" id="all_2"></td>
+          </tr>
+          <tr>
+            <th>3</th>
+            <td id="12"></td>
+            <td id="13"></td>
+            <td id="14"></td>
+            <td id="15"></td>
+            <td id="16"></td>
+            <td id="17"></td>
+            <td class="scoreSum" id="sum_3"></td>
+            <td class="scoreSum" id="all_3"></td>
+          </tr>
+          <tr>
+            <th>4</th>
+            <td id="18"></td>
+            <td id="19"></td>
+            <td id="20"></td>
+            <td id="21"></td>
+            <td id="22"></td>
+            <td id="23"></td>
+            <td class="scoreSum" id="sum_4"></td>
+            <td class="scoreSum" id="all_4"></td>
+          </tr>
+          <tr>
+            <th>5</th>
+            <td id="24"></td>
+            <td id="25"></td>
+            <td id="26"></td>
+            <td id="27"></td>
+            <td id="28"></td>
+            <td id="29"></td>
+            <td class="scoreSum" id="sum_5"></td>
+            <td class="scoreSum" id="all_5"></td>
+          </tr>
+          <tr>
+            <th>6</th>
+            <td id="30"></td>
+            <td id="31"></td>
+            <td id="32"></td>
+            <td id="34"></td>
+            <td id="34"></td>
+            <td id="35"></td>
+            <td class="scoreSum" id="sum_6"></td>
+            <td class="scoreSum" id="all_6"></td>
+          </tr>
+        </tbody>
+      </table>
+    </template>
+    <div id="overlay" ontouchstart="overlayClose()"></div>
+    <script src="new-site.js"></script>
+  </body>
+</html>

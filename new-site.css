@@ -1,0 +1,231 @@
+html {
+  background-color: var(--background-color);
+}
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/*色の定義*/
+:root {
+  --main-color: #a4bfda;
+  --sub-color: #659dc0;
+  --text-color: #40403e;
+  --shadow-color: rgba(208, 216, 218, 0.6);
+  --background-color: #f0f2f1;
+}
+/*黒くする*/
+#overlay {
+  display: none; /* 最初は非表示 */
+  position: fixed; /* 画面に固定 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明の黒 */
+  z-index: 10; /* 他の要素より前面に表示 */
+}
+
+/*見え隠れ*/
+.home {
+  display: none;
+}
+.home.open {
+  display: block;
+}
+.record {
+  display: none;
+}
+.record.open {
+  display: block;
+}
+.memo {
+  display: none;
+}
+.memo.open {
+  display: block;
+}
+.setting {
+  display: none;
+}
+.setting.open {
+  display: block;
+}
+
+/*header*/
+.header {
+  margin: 0;
+  background-color: var(--main-color);
+  height: 5vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1vh;
+  color: var(--text-color);
+}
+/*footer*/
+.footer {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  height: 5vh;
+  width: 100%;
+  background-color: var(--shadow-color);
+}
+.footer .material-icons {
+  color: var(--text-color);
+  padding: 1vh;
+  max-height: 5vh;
+  width: 25vw;
+}
+.footer .material-icons.open {
+  background-color: var(--shadow-color);
+}
+
+/*home*/
+
+.scoreTable {
+  width: 95vw;
+  margin: 1vh 2vw 2vh 3vw;
+  color: var(--text-color);
+  border-color: var(--text-color);
+  border-spacing: 3px;
+}
+.scoreTable th {
+  font-size: 10px;
+}
+.scoreTable td {
+  height: 1.3em;
+  width: 10vw;
+  font-size: 1em;
+  border: solid 1px var(--text-color);
+  border-radius: 5px;
+  color: var(--text-color);
+}
+.scoreTable .scoreSum {
+  width: 18vw;
+}
+.selectBox {
+  width: 10vw;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+.selectBox::after {
+  position: absolute;
+  right: 6px;
+  width: 8px;
+  height: 5px;
+  background-color: var(--text-color);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  content: "";
+  pointer-events: none;
+}
+
+.selectBox select {
+  appearance: none;
+  width: 10vw;
+  font-size: 10px;
+  border: none;
+  border-bottom: 1.5px solid var(--text-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.selectBox select:focus {
+  outline: none;
+}
+#saveCheckWindow {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 20vh;
+  width: 60vw;
+  margin: 40vh 20vw;
+  background-color: var(--background-color);
+  border: 1px solid var(--text-color);
+  border-radius: 10px;
+  font-size: 10px;
+  z-index: 11;
+}
+#saveCheckWindow button {
+  margin: 0 30px;
+  padding: 0 10px;
+  height: 5vh;
+  font-size: 15px;
+  color: var(--background-color);
+  background-color: var(--main-color);
+}
+.home button {
+  margin: 0.25vw;
+  height: 7vh;
+  width: 31vw;
+  font-size: 30px;
+  border: 1px solid var(--text-color);
+  border-radius: 10px;
+  box-shadow: 2px 2px var(--shadow-color);
+}
+.home .yellow {
+  background-color: yellow;
+  color: var(--text-color);
+}
+.home .red {
+  background-color: red;
+  color: var(--text-color);
+}
+.home .blue {
+  background-color: blue;
+  color: var(--background-color);
+}
+.home .black {
+  background-color: black;
+  color: var(--background-color);
+}
+.home .white {
+  background-color: white;
+  color: var(--text-color);
+}
+.home .gray {
+  background-color: gray;
+  color: var(--text-color);
+}
+
+/*memo*/
+.memo input {
+  width: 85vw;
+  margin: 2vh 0 0 0;
+  padding: 0.5em;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  border: 1px solid var(--text-color);
+  border-radius: 20px;
+  box-shadow: 2px 2px var(--shadow-color);
+}
+.memo input:focus {
+  outline: none;
+}
+.memo .memoList {
+  margin: 0 5vw;
+  padding: 0;
+}
+.memo .memoItem {
+  width: 90vw;
+  margin: 2vh 0;
+  padding: 0.5em 0;
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+  border-radius: 20px;
+  box-shadow: 2px 2px var(--shadow-color);
+}
+.memo .memoItem.checked {
+  color: var(--background-color);
+  background-color: var(--shadow-color);
+}
