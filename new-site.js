@@ -32,7 +32,7 @@ score[["日付",[70m],[50m],[30m],[18m],[10m],[レジスタ]],[...],...]
 
 */
 var score = [[]];
-//localstoregeの内容を取る
+//localstorageの内容を取る
 if (localStorage.getItem("score") && localStorage.getItem("score") !== "[]") {
   score = JSON.parse(localStorage.getItem("score"));
 } else {
@@ -47,6 +47,9 @@ if (localStorage.getItem("distance")) {
   document.getElementById(
     JSON.parse(localStorage.getItem("distance"))
   ).checked = true;
+} else {
+  //データが無いときに70mデータを表示
+  document.getElementById("70m").checked = true;
 }
 
 if (score[0][0] !== day) {
