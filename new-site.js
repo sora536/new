@@ -7,11 +7,16 @@ memoButton = document.getElementById("memoButton");
 setting = document.getElementById("setting");
 settingButton = document.getElementById("settingButton");
 
-scoreInfo = document.getElementById("scoreInfo");
+homeScoreInfo = document.getElementById("homeScoreInfo");
 select = document.getElementById("select");
 finalSelect = document.getElementById("finalSelect");
 
 memoList = document.getElementById("memoList");
+
+recordDate = document.getElementById("recordDate");
+recordDateInput = document.getElementById("recordDateInput");
+
+scoreTable = document.getElementById("scoreTable");
 
 day =
   new Date().getFullYear() +
@@ -37,8 +42,11 @@ if (localStorage.getItem("score") && localStorage.getItem("score") !== "[]") {
 }
 
 if (localStorage.getItem("distance")) {
-  scoreInfo.textContent = JSON.parse(localStorage.getItem("distance"));
+  homeScoreInfo.textContent = JSON.parse(localStorage.getItem("distance"));
   select.value = JSON.parse(localStorage.getItem("distance"));
+  document.getElementById(
+    JSON.parse(localStorage.getItem("distance"))
+  ).checked = true;
 }
 
 if (score[0][0] !== day) {
@@ -82,7 +90,7 @@ function scoreButtonClick(num) {
     document.getElementById("saveCheckWindow").style.display = "block";
   } else {
     //レジスタに保存
-    score[0][6].push(num.id);
+    score[0][6].push(num.textContent);
     setScoreTable("home", score[0][6].length, 0);
   }
   saveScore();
@@ -92,19 +100,18 @@ function saveCheckClick() {
   console.log(finalSelect.value);
 
   if (finalSelect.value == "70m") {
-    score[0][1].push(score[0][6]);
+    score[0][1] = score[0][1].concat(score[0][6]);
   } else if (finalSelect.value == "50m") {
-    score[0][2].push(score[0][6]);
+    score[0][2] = score[0][2].concat(score[0][6]);
   } else if (finalSelect.value == "30m") {
-    score[0][3].push(score[0][6]);
+    score[0][3] = score[0][3].concat(score[0][6]);
   } else if (finalSelect.value == "18m") {
-    score[0][4].push(score[0][6]);
+    score[0][4] = score[0][4].concat(score[0][6]);
   } else if (finalSelect.value == "10m") {
-    score[0][5].push(score[0][6]);
+    score[0][5] = score[0][5].concat(score[0][6]);
   }
 
   score[0][6] = [];
-  console.log(score[0][6]);
   saveScore();
   overlayClose();
   setScoreTable("home", 36, 0);
@@ -112,7 +119,8 @@ function saveCheckClick() {
 
 function changeDistance(distance) {
   localStorage.setItem("distance", JSON.stringify(distance.value));
-  scoreInfo.textContent = distance.value;
+  homeScoreInfo.textContent = distance.value;
+  document.getElementById(distance.value).checked = true;
 }
 
 //引き数として距離と表示する行射数day(arrayの場所)をとる
@@ -149,7 +157,7 @@ function setScoreTable(distance, shots, day) {
       score[day][6].length
     );
   }
-
+  //素点の表示
   for (let i = 0; i < shots; i++) {
     if (data[i] == undefined) {
       document.getElementById(distance + "-" + i).textContent = "";
@@ -157,6 +165,7 @@ function setScoreTable(distance, shots, day) {
       document.getElementById(distance + "-" + i).textContent = data[i];
     }
   }
+  //合計の計算、表示
   for (let round = 1; round - 1 < shots / 36; round++) {
     scoreSumAll = 0;
     for (let j = 1; j <= shots / 6; j++) {
@@ -175,11 +184,11 @@ function setScoreTable(distance, shots, day) {
         }
       }
       if (isNaN(scoreSum) || isNaN(scoreSumAll)) {
-        document.getElementById(distance + "-sum_" + j).textContent = "";
-        document.getElementById(distance + "-all_" + j).textContent = "";
+        document.getElementById(distance + "Sum-" + j).textContent = "";
+        document.getElementById(distance + "All-" + j).textContent = "";
       } else {
-        document.getElementById(distance + "-sum_" + j).textContent = scoreSum;
-        document.getElementById(distance + "-all_" + j).textContent =
+        document.getElementById(distance + "Sum-" + j).textContent = scoreSum;
+        document.getElementById(distance + "All-" + j).textContent =
           scoreSumAll;
       }
     }
@@ -187,11 +196,23 @@ function setScoreTable(distance, shots, day) {
 }
 //読み込みのときに表示
 setScoreTable("home", 36, 0);
+
+//record
+recordDate.textContent = day;
+
+for (let i = 0; i < score.length; i++) {
+  option = document.createElement("option");
+  option.textContent = score[i][0];
+  recordDateInput.appendChild(option);
+}
+
+function changeDateInput(date) {
+  recordDate.textContent = date.value;
+}
+
 //memoの作業
 
-//memoCLickでlocalstolageを更新してsetMemoで表示を更新する
-//memo =[["content",true],["content",false]]
-//memoClickでinputタグのreset
+//memoの削除をsettingで
 var memoContent = [];
 if (localStorage.getItem("memoContent")) {
   memoContent = JSON.parse(localStorage.getItem("memoContent"));

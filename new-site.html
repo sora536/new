@@ -30,7 +30,7 @@
             <th>合計</th>
           </tr>
           <tr>
-            <th colspan="8" style="text-align: left" id="scoreInfo">70m</th>
+            <th colspan="8" style="text-align: left" id="homeScoreInfo">70m</th>
             <th class="selectBox">
               <select id="select" onchange="changeDistance(this)">
                 <option value="70m">70m</option>
@@ -51,8 +51,8 @@
             <td id="home-3"></td>
             <td id="home-4"></td>
             <td id="home-5"></td>
-            <td class="scoreSum" id="home-sum_1"></td>
-            <td class="scoreSum" id="home-all_1"></td>
+            <td class="scoreSum" id="homeSum-1"></td>
+            <td class="scoreSum" id="homeAll-1"></td>
           </tr>
           <tr>
             <th>2</th>
@@ -62,8 +62,8 @@
             <td id="home-9"></td>
             <td id="home-10"></td>
             <td id="home-11"></td>
-            <td class="scoreSum" id="home-sum_2"></td>
-            <td class="scoreSum" id="home-all_2"></td>
+            <td class="scoreSum" id="homeSum-2"></td>
+            <td class="scoreSum" id="homeAll-2"></td>
           </tr>
           <tr>
             <th>3</th>
@@ -73,8 +73,8 @@
             <td id="home-15"></td>
             <td id="home-16"></td>
             <td id="home-17"></td>
-            <td class="scoreSum" id="home-sum_3"></td>
-            <td class="scoreSum" id="home-all_3"></td>
+            <td class="scoreSum" id="homeSum-3"></td>
+            <td class="scoreSum" id="homeAll-3"></td>
           </tr>
           <tr>
             <th>4</th>
@@ -84,8 +84,8 @@
             <td id="home-21"></td>
             <td id="home-22"></td>
             <td id="home-23"></td>
-            <td class="scoreSum" id="home-sum_4"></td>
-            <td class="scoreSum" id="home-all_4"></td>
+            <td class="scoreSum" id="homeSum-4"></td>
+            <td class="scoreSum" id="homeAll-4"></td>
           </tr>
           <tr>
             <th>5</th>
@@ -95,8 +95,8 @@
             <td id="home-27"></td>
             <td id="home-28"></td>
             <td id="home-29"></td>
-            <td class="scoreSum" id="home-sum_5"></td>
-            <td class="scoreSum" id="home-all_5"></td>
+            <td class="scoreSum" id="homeSum-5"></td>
+            <td class="scoreSum" id="homeAll-5"></td>
           </tr>
           <tr>
             <th>6</th>
@@ -106,47 +106,23 @@
             <td id="home-33"></td>
             <td id="home-34"></td>
             <td id="home-35"></td>
-            <td class="scoreSum" id="home-sum_6"></td>
-            <td class="scoreSum" id="home-all_6"></td>
+            <td class="scoreSum" id="homeSum-6"></td>
+            <td class="scoreSum" id="homeAll-6"></td>
           </tr>
         </tbody>
       </table>
-      <button id="X" class="yellow" ontouchstart="scoreButtonClick(this)">
-        X
-      </button>
-      <button id="10" class="yellow" ontouchstart="scoreButtonClick(this)">
-        10
-      </button>
-      <button id="9" class="yellow" ontouchstart="scoreButtonClick(this)">
-        9
-      </button>
-      <button id="8" class="red" ontouchstart="scoreButtonClick(this)">
-        8
-      </button>
-      <button id="7" class="red" ontouchstart="scoreButtonClick(this)">
-        7
-      </button>
-      <button id="6" class="blue" ontouchstart="scoreButtonClick(this)">
-        6
-      </button>
-      <button id="5" class="blue" ontouchstart="scoreButtonClick(this)">
-        5
-      </button>
-      <button id="4" class="black" ontouchstart="scoreButtonClick(this)">
-        4
-      </button>
-      <button id="3" class="black" ontouchstart="scoreButtonClick(this)">
-        3
-      </button>
-      <button id="2" class="white" ontouchstart="scoreButtonClick(this)">
-        2
-      </button>
-      <button id="1" class="white" ontouchstart="scoreButtonClick(this)">
-        1
-      </button>
-      <button id="M" class="gray" ontouchstart="scoreButtonClick(this)">
-        M
-      </button>
+      <button class="yellow" ontouchstart="scoreButtonClick(this)">X</button>
+      <button class="yellow" ontouchstart="scoreButtonClick(this)">10</button>
+      <button class="yellow" ontouchstart="scoreButtonClick(this)">9</button>
+      <button class="red" ontouchstart="scoreButtonClick(this)">8</button>
+      <button class="red" ontouchstart="scoreButtonClick(this)">7</button>
+      <button class="blue" ontouchstart="scoreButtonClick(this)">6</button>
+      <button class="blue" ontouchstart="scoreButtonClick(this)">5</button>
+      <button class="black" ontouchstart="scoreButtonClick(this)">4</button>
+      <button class="black" ontouchstart="scoreButtonClick(this)">3</button>
+      <button class="white" ontouchstart="scoreButtonClick(this)">2</button>
+      <button class="white" ontouchstart="scoreButtonClick(this)">1</button>
+      <button class="gray" ontouchstart="scoreButtonClick(this)">M</button>
       <div id="saveCheckWindow">
         <h1>注意</h1>
         <p>okを押した後に距離の変更はできません</p>
@@ -163,7 +139,42 @@
       </div>
     </div>
     <div class="record" id="record">
-      <h1>record</h1>
+      <div class="recordHeader">
+        <p id="recordDate">date</p>
+        <div class="recordDateInput">
+          <select
+            id="recordDateInput"
+            onchange="changeDateInput(this)"
+          ></select>
+        </div>
+      </div>
+      <div class="recordTab">
+        <label>
+          <input type="radio" name="recordTab" id="70m" />
+          70m
+        </label>
+        <div id="scoreTable"></div>
+        <label>
+          <input type="radio" name="recordTab" id="50m" />
+          50m
+        </label>
+        <div>ここにテーブルを作る</div>
+        <label>
+          <input type="radio" name="recordTab" id="30m" />
+          30m
+        </label>
+        <div>もちろん更新の関数も変える</div>
+        <label>
+          <input type="radio" name="recordTab" id="18m" />
+          18m
+        </label>
+        <div>んｂふぃｔ</div>
+        <label>
+          <input type="radio" name="recordTab" id="10m" />
+          10m
+        </label>
+        <div>きちゃ</div>
+      </div>
       <div id="scoreTable"></div>
     </div>
     <div class="memo" id="memo">
@@ -232,74 +243,7 @@
             <th colspan="9" style="left: 0" id="scoreInfo"></th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <th>1</th>
-            <td id="0"></td>
-            <td id="1"></td>
-            <td id="2"></td>
-            <td id="3"></td>
-            <td id="4"></td>
-            <td id="5"></td>
-            <td class="scoreSum" id="sum_1"></td>
-            <td class="scoreSum" id="all_1"></td>
-          </tr>
-          <tr>
-            <th>2</th>
-            <td id="6"></td>
-            <td id="7"></td>
-            <td id="8"></td>
-            <td id="9"></td>
-            <td id="10"></td>
-            <td id="11"></td>
-            <td class="scoreSum" id="sum_2"></td>
-            <td class="scoreSum" id="all_2"></td>
-          </tr>
-          <tr>
-            <th>3</th>
-            <td id="12"></td>
-            <td id="13"></td>
-            <td id="14"></td>
-            <td id="15"></td>
-            <td id="16"></td>
-            <td id="17"></td>
-            <td class="scoreSum" id="sum_3"></td>
-            <td class="scoreSum" id="all_3"></td>
-          </tr>
-          <tr>
-            <th>4</th>
-            <td id="18"></td>
-            <td id="19"></td>
-            <td id="20"></td>
-            <td id="21"></td>
-            <td id="22"></td>
-            <td id="23"></td>
-            <td class="scoreSum" id="sum_4"></td>
-            <td class="scoreSum" id="all_4"></td>
-          </tr>
-          <tr>
-            <th>5</th>
-            <td id="24"></td>
-            <td id="25"></td>
-            <td id="26"></td>
-            <td id="27"></td>
-            <td id="28"></td>
-            <td id="29"></td>
-            <td class="scoreSum" id="sum_5"></td>
-            <td class="scoreSum" id="all_5"></td>
-          </tr>
-          <tr>
-            <th>6</th>
-            <td id="30"></td>
-            <td id="31"></td>
-            <td id="32"></td>
-            <td id="34"></td>
-            <td id="34"></td>
-            <td id="35"></td>
-            <td class="scoreSum" id="sum_6"></td>
-            <td class="scoreSum" id="all_6"></td>
-          </tr>
-        </tbody>
+        <tbody></tbody>
       </table>
     </template>
     <div id="overlay" ontouchstart="overlayClose()"></div>
