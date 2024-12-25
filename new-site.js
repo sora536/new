@@ -62,6 +62,7 @@ function saveScore() {
 }
 
 function footerClick(e, id) {
+  event.preventDefault();
   home.classList.remove("open");
   homeButton.classList.remove("open");
   record.classList.remove("open");
@@ -87,6 +88,7 @@ function makeScoreTable() {
 }
 
 function scoreButtonClick(num) {
+  event.preventDefault();
   if (score[0][6].length == 36) {
     finalSelect.value = JSON.parse(localStorage.getItem("distance"));
     document.getElementById("overlay").style.display = "block";
@@ -100,7 +102,7 @@ function scoreButtonClick(num) {
 }
 
 function saveCheckClick() {
-  console.log(finalSelect.value);
+  event.preventDefault();
 
   if (finalSelect.value == "70m") {
     score[0][1] = score[0][1].concat(score[0][6]);
@@ -244,6 +246,7 @@ function memoClick(memoInput) {
   memoList.prepend(p);
 }
 function memoItemClick(item) {
+  event.preventDefault();
   item.classList.toggle("checked");
   for (let i = 0; i < memoContent.length; i++) {
     if (memoContent[i][0] == item.textContent) {
@@ -252,5 +255,4 @@ function memoItemClick(item) {
       localStorage.setItem("memoContent", JSON.stringify(memoContent));
     }
   }
-  //さがしてtoggle
 }
