@@ -256,3 +256,10 @@ function memoItemClick(item) {
     }
   }
 }
+
+function settingScoreAllRemoveClick() {
+  localStorage.removeItem("score");
+}
+function settingDataAllRemoveClick() {
+  localStorage.clear();
+}

@@ -1,4 +1,5 @@
 html {
+  touch-action: manipulation;
   background-color: var(--background-color);
 }
 body {
