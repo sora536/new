@@ -293,14 +293,19 @@ var memoContent = [];
 //localstorageの取得
 if (localStorage.getItem("memoContent")) {
   memoContent = JSON.parse(localStorage.getItem("memoContent"));
-  for (let i = 0; i < memoContent.length; i++) {
+  makeMemo(memoContent);
+}
+function makeMemo(content) {
+  console.log(content);
+  for (let i = 0; i < content.length; i++) {
     p = document.createElement("p");
-    if (memoContent[i][1]) {
+    if (content[i][1]) {
       p.classList.add("checked");
     }
     p.classList.add("memoItem");
     p.setAttribute("onclick", "memoItemClick(this)");
-    p.textContent = memoContent[i][0];
+    p.setAttribute("id", "memo-" + i);
+    p.textContent = content[i][0];
     memoList.prepend(p);
   }
 }
@@ -311,6 +316,7 @@ function memoClick(memoInput) {
   localStorage.setItem("memoContent", JSON.stringify(memoContent));
   p = document.createElement("p");
   p.classList.add("memoItem");
+  p.setAttribute("id", "memo-" + Number(memoContent.length - 1));
   p.setAttribute("onclick", "memoItemClick(this)");
   p.textContent = memoInput;
   memoList.prepend(p);
@@ -322,7 +328,6 @@ function memoItemClick(item) {
   item.classList.toggle("checked");
   for (let i = 0; i < memoContent.length; i++) {
     if (memoContent[i][0] == item.textContent) {
-      console.log(i);
       memoContent[i][1] = !memoContent[i][1];
       localStorage.setItem("memoContent", JSON.stringify(memoContent));
     }
@@ -331,11 +336,27 @@ function memoItemClick(item) {
 
 //以下デバック用のボタン
 
-function settingScoreAllRemoveClick() {
+function settingScoreAllRemove() {
   localStorage.removeItem("score");
   window.location.reload();
 }
-function settingDataAllRemoveClick() {
+function settingDataAllRemove() {
   localStorage.clear();
   window.location.reload();
+}
+function memoCheckedRemove() {
+  memoContent = JSON.parse(localStorage.getItem("memoContent"));
+  num = memoContent.length;
+  num1 = 0;
+  for (let i = 0; i < num; i++) {
+    document.getElementById("memo-" + i).remove();
+    console.log(memoContent[num1]);
+    if (memoContent[num1][1]) {
+      memoContent.splice(num1, 1);
+      num1 -= 1;
+    }
+    num1 += 1;
+  }
+  localStorage.setItem("memoContent", JSON.stringify(memoContent));
+  makeMemo(memoContent);
 }
