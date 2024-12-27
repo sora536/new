@@ -27,10 +27,9 @@ day =
 /*
 scoreの構造
 score[["日付",[70m],[50m],[30m],[18m],[10m],[レジスタ]],[...],...]
-
 */
 var score = [[]];
-//localstorageの内容を取る
+//localstorageのスコアの内容を取る
 if (localStorage.getItem("score") && localStorage.getItem("score") !== "[]") {
   score = JSON.parse(localStorage.getItem("score"));
 } else {
@@ -38,7 +37,7 @@ if (localStorage.getItem("score") && localStorage.getItem("score") !== "[]") {
   score = [[day, [], [], [], [], [], []]];
   saveScore();
 }
-
+//localstorageの距離の内容を取る
 if (localStorage.getItem("distance")) {
   homeScoreInfo.textContent = JSON.parse(localStorage.getItem("distance"));
   select.value = JSON.parse(localStorage.getItem("distance"));
@@ -49,16 +48,16 @@ if (localStorage.getItem("distance")) {
   //データが無いときに70mデータを表示
   document.getElementById("70m").checked = true;
 }
-
+//ログボ
 if (score[0][0] !== day) {
   score.unshift([day, [], [], [], [], [], []]);
   saveScore();
 }
-
+//スコアをlocalstorageに保存
 function saveScore() {
   localStorage.setItem("score", JSON.stringify(score));
 }
-
+//フッターのクリック
 function footerClick(e, id) {
   event.preventDefault();
   home.classList.remove("open");
@@ -75,18 +74,13 @@ function footerClick(e, id) {
     makeScoreTable(0);
   }
 }
+//黒いやつのクリック
 function overlayClose() {
   document.getElementById("overlay").style.display = "none";
   document.getElementById("saveCheckWindow").style.display = "none";
   select.value = JSON.parse(localStorage.getItem("distance"));
 }
-
-//必ずidは同じのを使わず、tableにdistanceのidをつける
-scoreTable = document.getElementById("scoreTable");
-
-//numはラウンド数を数字で
-//whereははあ位置する場所のdocument
-
+//recordのタブのidをつけ直す
 for (let i = 0; i < 5; i++) {
   scoreTable = document.getElementById("scoreTable");
   if (i == 0) {
@@ -101,8 +95,7 @@ for (let i = 0; i < 5; i++) {
     scoreTable.setAttribute("id", "10m-scoreTable");
   }
 }
-
-//dayは数字で
+//recordのスコア氷を作る、ついで表示まで
 function makeScoreTable(day) {
   for (let j = 1; j < 6; j++) {
     if (j == 1) {
@@ -148,11 +141,11 @@ function makeScoreTable(day) {
     setScoreTable(distance, score[day][j].length, day);
   }
 }
-
+//素点の入力
 function scoreButtonClick(num) {
   event.preventDefault();
   if (score[0][6].length == 36) {
-    finalSelect.value = JSON.parse(localStorage.getItem("distance"));
+    finalSelect.value = select.value;
     document.getElementById("overlay").style.display = "block";
     document.getElementById("saveCheckWindow").style.display = "block";
   } else {
@@ -162,7 +155,7 @@ function scoreButtonClick(num) {
   }
   saveScore();
 }
-
+//最終確認のとき
 function saveCheckClick() {
   event.preventDefault();
 
@@ -183,13 +176,12 @@ function saveCheckClick() {
   overlayClose();
   setScoreTable("home", 36, 0);
 }
-
+//距離が変わったとき
 function changeDistance(distance) {
   localStorage.setItem("distance", JSON.stringify(distance.value));
   homeScoreInfo.textContent = distance.value;
   document.getElementById(distance.value).checked = true;
 }
-
 //引き数として距離と表示する行射数day(arrayの場所)をとる
 function setScoreTable(distance, shots, day) {
   //使うデータの複製
@@ -272,14 +264,16 @@ function setScoreTable(distance, shots, day) {
 setScoreTable("home", 36, 0);
 
 //record
-recordDate.textContent = day;
 
+//上の日付を更新
+recordDate.textContent = day;
+//日付選択を生成
 for (let i = 0; i < score.length; i++) {
   option = document.createElement("option");
   option.textContent = score[i][0];
   recordDateInput.appendChild(option);
 }
-
+//日付の更新時の処理
 function changeDateInput(date) {
   recordDate.textContent = date.value;
   for (let i = 0; i < score.length; i++) {
@@ -289,10 +283,11 @@ function changeDateInput(date) {
   }
 }
 
-//memoの作業
+//memo
 
 //memoの削除をsettingで
 var memoContent = [];
+//localstorageの取得
 if (localStorage.getItem("memoContent")) {
   memoContent = JSON.parse(localStorage.getItem("memoContent"));
   for (let i = 0; i < memoContent.length; i++) {
@@ -306,7 +301,7 @@ if (localStorage.getItem("memoContent")) {
     memoList.prepend(p);
   }
 }
-
+//memoの追加
 function memoClick(memoInput) {
   event.preventDefault();
 
@@ -319,6 +314,7 @@ function memoClick(memoInput) {
   p.textContent = memoInput;
   memoList.prepend(p);
 }
+//表示,非表示の切り替え
 function memoItemClick(item) {
   event.preventDefault();
   item.classList.toggle("checked");
@@ -331,9 +327,13 @@ function memoItemClick(item) {
   }
 }
 
+//以下デバック用のボタン
+
 function settingScoreAllRemoveClick() {
   localStorage.removeItem("score");
+  window.location.reload();
 }
 function settingDataAllRemoveClick() {
   localStorage.clear();
+  window.location.reload();
 }
