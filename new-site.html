@@ -158,24 +158,23 @@
           <input type="radio" name="recordTab" id="50m" />
           50m
         </label>
-        <div>ここにテーブルを作る</div>
+        <div id="scoreTable"></div>
         <label>
           <input type="radio" name="recordTab" id="30m" />
           30m
         </label>
-        <div>もちろん更新の関数も変える</div>
+        <div id="scoreTable"></div>
         <label>
           <input type="radio" name="recordTab" id="18m" />
           18m
         </label>
-        <div>んｂふぃｔ</div>
+        <div id="scoreTable"></div>
         <label>
           <input type="radio" name="recordTab" id="10m" />
           10m
         </label>
-        <div>きちゃ</div>
+        <div id="scoreTable"></div>
       </div>
-      <div id="scoreTable"></div>
     </div>
     <div class="memo" id="memo">
       <form onsubmit="memoClick(this.firstElementChild.value)">
@@ -232,7 +231,7 @@
     </footer>
     <!--改良必須、特にidを動的に変えたい-->
     <template id="scoreTableTemplate">
-      <table class="scoreTable">
+      <table class="scoreTable" id="scoreTable">
         <thead>
           <tr>
             <th></th>
@@ -249,7 +248,26 @@
             <th colspan="9" style="left: 0" id="scoreInfo"></th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          <tr id="row-1">
+            <th>1</th>
+          </tr>
+          <tr id="row-2">
+            <th>2</th>
+          </tr>
+          <tr id="row-3">
+            <th>3</th>
+          </tr>
+          <tr id="row-4">
+            <th>4</th>
+          </tr>
+          <tr id="row-5">
+            <th>5</th>
+          </tr>
+          <tr id="row-6">
+            <th>6</th>
+          </tr>
+        </tbody>
       </table>
     </template>
     <div id="overlay" ontouchstart="overlayClose()"></div>
