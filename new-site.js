@@ -46,6 +46,7 @@ if (localStorage.getItem("distance")) {
   ).checked = true;
 } else {
   //データが無いときに70mデータを表示
+  localStorage.setItem("distance", '"70m"');
   document.getElementById("70m").checked = true;
 }
 //ログボ
@@ -165,7 +166,6 @@ function scoreRemove() {
 //最終確認のとき
 function saveCheckClick() {
   event.preventDefault();
-
   if (finalSelect.value == "70m") {
     score[0][1] = score[0][1].concat(score[0][6]);
   } else if (finalSelect.value == "50m") {
@@ -177,7 +177,6 @@ function saveCheckClick() {
   } else if (finalSelect.value == "10m") {
     score[0][5] = score[0][5].concat(score[0][6]);
   }
-
   score[0][6] = [];
   saveScore();
   overlayClose();
@@ -308,15 +307,14 @@ if (localStorage.getItem("memoContent")) {
 //memoの追加
 function memoClick(memoInput) {
   event.preventDefault();
-
   memoContent.push([memoInput, false]);
   localStorage.setItem("memoContent", JSON.stringify(memoContent));
-
   p = document.createElement("p");
   p.classList.add("memoItem");
   p.setAttribute("onclick", "memoItemClick(this)");
   p.textContent = memoInput;
   memoList.prepend(p);
+  document.getElementById("memoInput").value = "";
 }
 //表示,非表示の切り替え
 function memoItemClick(item) {
