@@ -105,7 +105,7 @@ body {
   height: 1.1lh;
   width: 9vw;
   font-size: 1em;
-  border: solid 0.25vw var(--text-color);
+  border: solid 1px var(--text-color);
   border-radius: 5px;
   color: var(--text-color);
 }
@@ -198,6 +198,15 @@ body {
 .home .gray {
   background-color: gray;
   color: var(--text-color);
+}
+.home .scoreRemove {
+  position: absolute;
+  bottom: 7vh;
+  right: 3vw;
+  padding: 10px 11px 10px 9px;
+  border-radius: 100%;
+  color: var(--text-color);
+  background-color: var(--main-color);
 }
 
 /*record*/

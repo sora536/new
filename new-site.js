@@ -155,6 +155,13 @@ function scoreButtonClick(num) {
   }
   saveScore();
 }
+//素点の削除
+function scoreRemove() {
+  event.preventDefault();
+  score[0][6].pop();
+  setScoreTable("home", score[0][6].length + 1, 0);
+  saveScore();
+}
 //最終確認のとき
 function saveCheckClick() {
   event.preventDefault();
@@ -211,10 +218,7 @@ function setScoreTable(distance, shots, day) {
       score[day][5].length
     );
   } else if (distance == "home") {
-    data = score[day][6].slice(
-      score[day][6].length - shots,
-      score[day][6].length
-    );
+    data = score[day][6].slice(0, score[day][6].length);
   }
   //素点の表示
   for (let i = 0; i < shots; i++) {
