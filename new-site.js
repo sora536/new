@@ -75,6 +75,9 @@ function footerClick(e, id) {
     makeScoreTable(0);
     recordDateInput.value = day;
     recordDate.textContent = day;
+    document.getElementById(
+      JSON.parse(localStorage.getItem("distance"))
+    ).checked = true;
   }
 }
 //黒いやつのクリック
