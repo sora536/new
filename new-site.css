@@ -72,8 +72,6 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
-  position: absolute;
-  bottom: 0;
   height: 5vh;
   width: 100%;
   background-color: var(--shadow-color);
@@ -89,10 +87,14 @@ body {
 }
 
 /*home*/
-
+.home {
+  height: 90vh;
+  overflow: scroll;
+}
 .scoreTable {
   width: 95vw;
   margin: 0 2vw 0 3vw;
+  padding: 0;
   color: var(--text-color);
   border-color: var(--text-color);
   border-spacing: 3px;
@@ -212,6 +214,10 @@ body {
 
 /*record*/
 
+.record {
+  height: 90vh;
+  overflow: scroll;
+}
 .recordHeader {
   color: var(--text-color);
   padding: 0.5vh 0;
@@ -260,7 +266,6 @@ body {
 .recordTab {
   display: flex;
   flex-wrap: wrap;
-  max-width: 100%;
 }
 
 .recordTab label {
@@ -288,7 +293,6 @@ body {
 .recordTab div {
   display: none;
   width: 100%;
-  padding: 1.5em 1em;
   background-color: var(--background-color);
 }
 
@@ -304,13 +308,17 @@ body {
 .recordTab label:has(:checked) + div {
   display: block;
 }
-
-#scoreTable {
-  margin: 0;
-  padding: 0;
+.record .scoreTable {
+  margin: 0 2vw 1vh 3vw;
 }
 
 /*memo*/
+
+.memo {
+  height: 90vh;
+  overflow: scroll;
+}
+
 .memo input {
   width: 85vw;
   margin: 2vh 0 0 0;
@@ -345,4 +353,6 @@ body {
 /*setting*/
 .setting {
   color: var(--text-color);
+  height: 90vh;
+  overflow: scroll;
 }

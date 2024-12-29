@@ -296,7 +296,6 @@ if (localStorage.getItem("memoContent")) {
   makeMemo(memoContent);
 }
 function makeMemo(content) {
-  console.log(content);
   for (let i = 0; i < content.length; i++) {
     p = document.createElement("p");
     if (content[i][1]) {
