@@ -106,7 +106,7 @@ body {
 }
 .scoreTable td {
   padding: 0;
-  height: 1.1lh;
+  height: 1lh;
   width: 9vw;
   font-size: 1em;
   border: solid 1px var(--text-color);

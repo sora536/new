@@ -73,6 +73,8 @@ function footerClick(e, id) {
   id.classList.add("open");
   if (id.id == "record") {
     makeScoreTable(0);
+    recordDateInput.value = day;
+    recordDate.textContent = day;
   }
 }
 //黒いやつのクリック
