@@ -123,6 +123,9 @@ function makeScoreTable(day) {
       //テーブルをラウンド数分作る
       var clone = scoreTableTemplate.content.cloneNode(true);
       scoreTable.appendChild(clone);
+      document.getElementById("scoreInfo").textContent =
+        distance + "-" + Number(round + 1);
+      document.getElementById("scoreInfo").setAttribute("id", "");
       //各エンド毎に
       for (let end = 0; end < 6; end++) {
         row = document.getElementById("row-" + Number(end + 1));
