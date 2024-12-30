@@ -171,6 +171,29 @@ body {
   color: var(--background-color);
   background-color: var(--main-color);
 }
+#addTableWindow {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 20vh;
+  width: 60vw;
+  margin: 40svh 20vw;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  border: 1px solid var(--text-color);
+  border-radius: 10px;
+  font-size: 10px;
+  z-index: 11;
+}
+#addTableWindow button {
+  margin: 0 30px;
+  padding: 0 10px;
+  height: 5svh;
+  font-size: 15px;
+  color: var(--background-color);
+  background-color: var(--main-color);
+}
 .home .addButton {
   color: var(--text-color);
   background-color: var(--background-color);

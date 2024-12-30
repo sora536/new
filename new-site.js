@@ -10,6 +10,7 @@ settingButton = document.getElementById("settingButton");
 homeScoreInfo = document.getElementById("homeScoreInfo");
 select = document.getElementById("select");
 finalSelect = document.getElementById("finalSelect");
+addTableSelect = document.getElementById("addTableSelect");
 
 memoList = document.getElementById("memoList");
 
@@ -84,6 +85,7 @@ function footerClick(e, id) {
 function overlayClose() {
   document.getElementById("overlay").style.display = "none";
   document.getElementById("saveCheckWindow").style.display = "none";
+  document.getElementById("addTableWindow").style.display = "none";
   select.value = JSON.parse(localStorage.getItem("distance"));
 }
 //recordのタブのidをつけ直す
@@ -149,7 +151,32 @@ function makeScoreTable(day) {
 }
 //新しいテーブルの用意
 function newTableClick() {
+  addTableSelect.value = select.value;
   document.getElementById("overlay").style.display = "block";
+  document.getElementById("addTableWindow").style.display = "block";
+}
+//push
+function addTable() {
+  console.log(addTableSelect.value);
+  num = score[0][6].length;
+  for (let i = 0; i < 36 - num; i++) {
+    score[0][6].push("");
+  }
+  if (addTableSelect.value == "70m") {
+    score[0][1] = score[0][1].concat(score[0][6]);
+  } else if (addTableSelect.value == "50m") {
+    score[0][2] = score[0][2].concat(score[0][6]);
+  } else if (addTableSelect.value == "30m") {
+    score[0][3] = score[0][3].concat(score[0][6]);
+  } else if (addTableSelect.value == "18m") {
+    score[0][4] = score[0][4].concat(score[0][6]);
+  } else if (addTableSelect.value == "10m") {
+    score[0][5] = score[0][5].concat(score[0][6]);
+  }
+  score[0][6] = [];
+  saveScore();
+  overlayClose();
+  setScoreTable("home", 36, 0);
 }
 //素点の入力
 function scoreButtonClick(num) {
@@ -246,7 +273,10 @@ function setScoreTable(distance, shots, day) {
           scoreSum += 10;
           scoreSumAll += 10;
         } else if (data[i + 6 * (j - 1) + 36 * (round - 1)] == "M") {
-        } else if (data[i + 6 * (j - 1) + 36 * (round - 1)] == undefined) {
+        } else if (
+          data[i + 6 * (j - 1) + 36 * (round - 1)] == undefined ||
+          data[i + 6 * (j - 1) + 36 * (round - 1)] == ""
+        ) {
           scoreSum = NaN;
           scoreSumAll = NaN;
         } else {

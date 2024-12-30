@@ -145,6 +145,20 @@
           <button onclick="saveCheckClick()">ok</button>
         </div>
       </div>
+      <div id="addTableWindow">
+        <h1>注意</h1>
+        <p>okを押した後に編集はできません</p>
+        <div class="selectBox">
+          <select id="addTableSelect" onchange="changeDistance(this)">
+            <option value="70m">70m</option>
+            <option value="50m">50m</option>
+            <option value="30m">30m</option>
+            <option value="18m">18m</option>
+            <option value="10m">10m</option>
+          </select>
+          <button onclick="addTable()">ok</button>
+        </div>
+      </div>
     </div>
     <div class="record" id="record">
       <div class="recordHeader">
