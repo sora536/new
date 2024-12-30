@@ -95,7 +95,7 @@ body {
 }
 .scoreTable {
   width: 95vw;
-  margin: 0 2vw 0 3vw;
+  margin: 0.8lh 2vw 0 3vw;
   padding: 0;
   color: var(--text-color);
   border-color: var(--text-color);
@@ -171,9 +171,21 @@ body {
   color: var(--background-color);
   background-color: var(--main-color);
 }
+.home .addButton {
+  color: var(--text-color);
+  background-color: var(--background-color);
+  position: absolute;
+  top: 5svh;
+  right: 2vw;
+  font-size: 10px;
+  height: 1.5lh;
+  width: 15vw;
+  border-radius: 100px;
+  box-shadow: none;
+}
 .home button {
   margin: 0.25vw;
-  height: 9svh;
+  height: 15vw;
   width: 31vw;
   font-size: 30px;
   border: 1px solid var(--text-color);
