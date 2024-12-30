@@ -153,7 +153,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  height: 20svh;
+  height: 20vh;
   width: 60vw;
   margin: 40svh 20vw;
   color: var(--text-color);

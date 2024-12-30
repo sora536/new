@@ -147,6 +147,10 @@ function makeScoreTable(day) {
     setScoreTable(distance, score[day][j].length, day);
   }
 }
+//新しいテーブルの用意
+function newTableClick() {
+  document.getElementById("overlay").style.display = "block";
+}
 //素点の入力
 function scoreButtonClick(num) {
   event.preventDefault();
