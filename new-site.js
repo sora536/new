@@ -151,9 +151,11 @@ function makeScoreTable(day) {
 }
 //新しいテーブルの用意
 function newTableClick() {
-  addTableSelect.value = select.value;
-  document.getElementById("overlay").style.display = "block";
-  document.getElementById("addTableWindow").style.display = "block";
+  if (score[0][6].length !== 0) {
+    addTableSelect.value = select.value;
+    document.getElementById("overlay").style.display = "block";
+    document.getElementById("addTableWindow").style.display = "block";
+  }
 }
 //push
 function addTable() {
