@@ -1,6 +1,7 @@
 html {
   touch-action: manipulation;
   background-color: var(--background-color);
+  translate: none;
 }
 body {
   margin: 0;
