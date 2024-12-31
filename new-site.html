@@ -169,33 +169,56 @@
             onchange="changeDateInput(this)"
           ></select>
         </div>
+        <div class="toggleSwitch">
+          <input id="toggle"type="checkbox" />
+          <label for="toggle"  >
+        </div>
       </div>
       <div class="recordTab">
         <label>
           <input type="radio" name="recordTab" id="70m" />
           70m
         </label>
-        <div id="scoreTable"></div>
+        <div class="scoreTableTab">
+          <div id="70m-scoreTable" ></div>
+          <div id="70m-goodScoreTable" style="display: none;"></div>
+        </div>
+
         <label>
           <input type="radio" name="recordTab" id="50m" />
           50m
         </label>
-        <div id="scoreTable"></div>
+        <div class="scoreTableTab">
+          <div id="50m-scoreTable"></div>
+          <div id="50m-goodScoreTable"></div>
+        </div>
         <label>
           <input type="radio" name="recordTab" id="30m" />
           30m
         </label>
-        <div id="scoreTable"></div>
+        <div class="scoreTableTab">
+          <div id="30m-scoreTable"></div>
+          <div id="30m-goodScoreTable"></div>
+
+        </div>
         <label>
           <input type="radio" name="recordTab" id="18m" />
           18m
         </label>
-        <div id="scoreTable"></div>
+        <div class="scoreTableTab">
+          <div id="18m-scoreTable"></div>
+          <div id="18m-goodScoreTable"></div>
+
+        </div>
         <label>
           <input type="radio" name="recordTab" id="10m" />
           10m
         </label>
-        <div id="scoreTable"></div>
+        <div class="scoreTableTab">
+          <div id="10m-scoreTable"></div>
+          <div id="10m-goodScoreTable"></div>
+
+        </div>
       </div>
     </div>
     <div class="memo" id="memo">

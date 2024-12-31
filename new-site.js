@@ -17,6 +17,8 @@ memoList = document.getElementById("memoList");
 recordDate = document.getElementById("recordDate");
 recordDateInput = document.getElementById("recordDateInput");
 
+toggle = document.getElementById("toggle");
+
 day =
   new Date().getFullYear() +
   "年" +
@@ -74,6 +76,7 @@ function footerClick(e, id) {
   id.classList.add("open");
   if (id.id == "record") {
     makeScoreTable(0);
+    makeGoodScoreTable(0);
     recordDateInput.value = day;
     recordDate.textContent = day;
     document.getElementById(
@@ -87,21 +90,6 @@ function overlayClose() {
   document.getElementById("saveCheckWindow").style.display = "none";
   document.getElementById("addTableWindow").style.display = "none";
   select.value = JSON.parse(localStorage.getItem("distance"));
-}
-//recordのタブのidをつけ直す
-for (let i = 0; i < 5; i++) {
-  scoreTable = document.getElementById("scoreTable");
-  if (i == 0) {
-    scoreTable.setAttribute("id", "70m-scoreTable");
-  } else if (i == 1) {
-    scoreTable.setAttribute("id", "50m-scoreTable");
-  } else if (i == 2) {
-    scoreTable.setAttribute("id", "30m-scoreTable");
-  } else if (i == 3) {
-    scoreTable.setAttribute("id", "18m-scoreTable");
-  } else if (i == 4) {
-    scoreTable.setAttribute("id", "10m-scoreTable");
-  }
 }
 //recordのスコア氷を作る、ついで表示まで
 function makeScoreTable(day) {
@@ -150,6 +138,102 @@ function makeScoreTable(day) {
       }
     }
     setScoreTable(distance, score[day][j].length, day);
+  }
+}
+
+function makeGoodScoreTable(day) {
+  data = [[], [], [], [], []];
+  for (let j = 1; j < 6; j++) {
+    if (j == 1) {
+      distance = "70m";
+    } else if (j == 2) {
+      distance = "50m";
+    } else if (j == 3) {
+      distance = "30m";
+    } else if (j == 4) {
+      distance = "18m";
+    } else if (j == 5) {
+      distance = "10m";
+    }
+    for (let i = 0; i < score[day][j].length / 6; i++) {
+      num = 0;
+      for (let h = 0; h < 6; h++) {
+        if (score[day][j][6 * i + h] == "X") {
+          num += 10;
+        } else if (score[day][j][6 * i + h] == "M") {
+        } else if (
+          score[day][j][6 * i + h] == undefined ||
+          score[day][j][6 * i + h] == ""
+        ) {
+          num = NaN;
+        } else {
+          num += Number(score[day][j][6 * i + h]);
+        }
+      }
+      data[j - 1].push(num);
+    }
+    max = 0;
+    for (let i = 0; i < data[j - 1].length - 5; i++) {
+      data[j - 1][i] = Number(
+        data[j - 1][i] +
+          data[j - 1][i + 1] +
+          data[j - 1][i + 2] +
+          data[j - 1][i + 3] +
+          data[j - 1][i + 4] +
+          data[j - 1][i + 5]
+      );
+    }
+    for (let i = 0; i < 5; i++) {
+      data[j - 1].pop();
+    }
+    for (let i = 0; i < data[j - 1].length; i++) {
+      if (!isNaN(data[j - 1][i])) {
+        max = Math.max(data[j - 1][i], max);
+      }
+    }
+    num = data[j - 1].indexOf(max) * 6;
+    data[j - 1] = score[day][j].slice(num, num + 36);
+
+    document.getElementById(distance + "-goodScoreTable").innerHTML = "";
+    scoreTable = document.getElementById(distance + "-goodScoreTable");
+    var clone = scoreTableTemplate.content.cloneNode(true);
+    scoreTable.appendChild(clone);
+    document.getElementById("scoreInfo").textContent = distance + "-goodScore";
+    document.getElementById("scoreInfo").setAttribute("id", "");
+    //各エンド毎に
+    sumAll = 0;
+    for (let end = 0; end < 6; end++) {
+      sum = 0;
+      row = document.getElementById("row-" + Number(end + 1));
+      for (let i = 0; i < 6; i++) {
+        td = document.createElement("td");
+        td.textContent = data[j - 1][6 * end + i];
+        row.appendChild(td);
+        if (data[j - 1][6 * end + i] == "X") {
+          sum += 10;
+          sumAll += 10;
+        } else if (data[j - 1][6 * end + i] == "M") {
+        } else {
+          sum += Number(data[j - 1][6 * end + i]);
+          sumAll += Number(data[j - 1][6 * end + i]);
+        }
+      }
+      if (isNaN(sum)) {
+        sum = "";
+        sumAll = "";
+      }
+      td = document.createElement("td");
+      td.classList.add("scoreSum");
+      td.textContent = sum;
+      row.appendChild(td);
+
+      td = document.createElement("td");
+      td.classList.add("scoreSum");
+      td.textContent = sumAll;
+      row.appendChild(td);
+
+      row.setAttribute("id", "");
+    }
   }
 }
 //新しいテーブルの用意
@@ -326,9 +410,32 @@ function changeDateInput(date) {
   for (let i = 0; i < score.length; i++) {
     if (score[i][0] == date.value) {
       makeScoreTable(i);
+      makeGoodScoreTable(i);
     }
   }
 }
+//いいとこ取りと普通の切り替え
+toggle.addEventListener("click", function (e) {
+  console.log(toggle.checked);
+  for (let j = 1; j < 6; j++) {
+    if (j == 1) {
+      distance = "70m";
+    } else if (j == 2) {
+      distance = "50m";
+    } else if (j == 3) {
+      distance = "30m";
+    } else if (j == 4) {
+      distance = "18m";
+    } else if (j == 5) {
+      distance = "10m";
+    }
+
+    document.getElementById(distance + "-scoreTable").style.display =
+      toggle.checked ? "none" : "block";
+    document.getElementById(distance + "-goodScoreTable").style.display =
+      toggle.checked ? "block" : "none";
+  }
+});
 
 //memo
 
