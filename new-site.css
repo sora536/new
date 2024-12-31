@@ -96,7 +96,8 @@ body {
 }
 .scoreTable {
   width: 95vw;
-  margin: 0.8lh 2vw 0 3vw;
+  font-size: 15px;
+  margin: 1lh 2vw 0 3vw;
   padding: 0;
   color: var(--text-color);
   border-color: var(--text-color);
